@@ -55,10 +55,10 @@ sub tool {
     my $cgi = $self->{'cgi'};
 
     unless ( $cgi->param('submitted') ) {
-        $self->tool_step1();
+        $self->ToolTemplate_step1();
     }
     else {
-        $self->tool_step2();
+        $self->ToolTemplate_step2();
     }
 
 }
@@ -122,24 +122,24 @@ sub uninstall() {
     return C4::Context->dbh->do("DROP TABLE $table");
 }
 
-sub tool_step1 {
+sub ToolTemplate_step1 {
     my ( $self, $args ) = @_;
     my $cgi = $self->{'cgi'};
 
-    my $template = $self->get_template({ file => 'tool-step1.tt' });
+    my $template = $self->get_template({ file => 'ToolTemplate-step1.tt' });
 
     print $cgi->header();
     print $template->output();
 }
 
-sub tool_step2 {
+sub ToolTemplate_step2 {
     my ( $self, $args ) = @_;
     my $cgi = $self->{'cgi'};
 
-    my $template = $self->get_template({ file => 'tool-step2.tt' });
+    my $template = $self->get_template({ file => 'ToolTemplate-step2.tt' });
 
     my @victims;
-    
+
     $template->param( 'victims' => \@victims );
 
     print $cgi->header();
